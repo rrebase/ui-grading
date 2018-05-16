@@ -1,0 +1,127 @@
+{% extends 'grading/base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'grading/css/style.css' %}">
+{% endblock %}
+
+{% block title %}Uus hindamine{% endblock %}
+
+{% block content %}
+  <div style="margin-top: 20px" id="app">
+    <h1 style="color: white" class="text-center mb-5">Tudengi hindamine</h1>
+    <div class="grading-area">
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 mt-3">
+          <form method="post" action="/grading/newgrade" target="_blank">
+            {% csrf_token %}
+            <label for="basic-url">Töö asukoht dijkstras</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon">http://dijkstra.cs.ttu.ee/~</span>
+              </div>
+              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon" name="uniid">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">/ui/t2/</span>
+              </div>
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit"><i class="fas fa-eye"></i> Vaata</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 mt-5">
+          <div class="row">
+            <div class="form-group col-6">
+              <label for="basic-url">I Tudengi Uni-ID</label>
+              <input type="text" class="form-control" id="name1" aria-describedby="nameHelp">
+            </div>
+            <div class="form-group col-6">
+              <label for="basic-url">II Tudengi Uni-ID</label>
+              <input type="text" class="form-control" id="name1" aria-describedby="nameHelp">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Kommentaar</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <a href="{% url 'grades' %}" class="btn btn-danger mb-5 mt-2">Märgi plagiaadiks</a>
+
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="none" id="radio1" value="option1" checked>
+            <label class="form-check-label" for="radio1">
+              Ei hiline
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="one" id="radio2" value="option2">
+            <label class="form-check-label" for="radio2">
+              Hilineb 1 nädala
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="morethanone" id="radio3" value="option3">
+            <label class="form-check-label" for="radio3">
+              Hilineb rohkem kui 1 nädala
+            </label>
+          </div>
+
+          <ul class="list-group mt-5">
+            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+              <div>
+                Baasfunktsionaalsus
+                <ul class="mt-3" style="padding-left: 20px">
+                  <li>Ootejärjekord</li>
+                  <li>Sortimine (lohistamine või klõps)</li>
+                  <li>Tähtajaline lisaülesanne</li>
+                  <li>Elude kaotamine</li>
+                  <li>Mängu läbikukkumine, punktid, ja kordamine</li>
+                  <li>Kasutaja tähelepanu juhitakse animatsioonidega</li>
+                </ul>
+              </div>
+              <div class="d-flex justify-content-start">
+                <div class="btn btn-secondary mr-2 d-flex">10 p</div>
+                <input type="checkbox" checked data-toggle="toggle"
+                       data-on="<i class='fas fa-times'></i>"
+                       data-off="<i class='fas fa-check'></i>"
+                       data-onstyle="primary" data-offstyle="success">
+              </div>
+            </li>
+          </ul>
+          <ul class="list-group mt-5">
+            {% for bonus in bonus_tasks %}
+              <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-primary">
+                {{ bonus }}
+                <div class="d-flex">
+                  <div class="btn btn-secondary mr-2 d-flex align-items-center"><span class="bonus-point">{{ bonus.points }}</span> p</div>
+                  <input class="bacon" type="checkbox" checked data-toggle="toggle"
+                         data-on="<i class='fas fa-times'></i>"
+                         data-off="<i class='fas fa-check'></i>"
+                         data-onstyle="primary" data-offstyle="success">
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 additional-info">
+
+          <div class="text-center mt-5">
+            <h3 style="color: white">Kokku: <span v-text="total"></span> punkti</h3>
+            <button class="btn btn-success mt-3" style="margin-bottom: 100px" @click="incrementTotal">Salvesta</button>
+          </div>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </div>
+  </div>
+  {% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="{% static 'grading/js/app.js' %}"></script>
+  {% endblock %}
+{% endblock %}

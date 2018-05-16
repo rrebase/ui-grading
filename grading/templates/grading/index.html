@@ -1,0 +1,18 @@
+{% extends 'grading/base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'grading/css/style.css' %}">
+{% endblock %}
+
+{% block title %}Hindamine{% endblock %}
+
+{% block content %}
+  <div class="text-center" style="margin-top: 80px">
+    <h2 style="color: white"><i class="fas fa-graduation-cap"></i> Hindamine</h2>
+    <div class="mt-5">
+      <a href="{% url 'grades' %}" class="btn btn-info" style="color:white"><i class="fas fa-eye"></i> Vaata tulemusi</a>
+      <a href="{% url 'newgrade' %}" class="btn btn-info" style="color:white"><i class="fas fa-plus-circle"></i> Alusta uut hindamist</a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'grading/base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'grading/css/style.css' %}">
+{% endblock %}
+
+{% block title %}Tulemus{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1 class="display-4">Hindamise tulemus</h1>newvu
+    <p style="color: red;">{% if plag %}Töö on plagiaat!{% endif %}</p>
+    {% if points >= 10 %}
+      <p class="lead" style="color: green;">Tulemus jääb positiivsesse hindamisvahemiku (10-20 punkti).</p>
+    {% else %}
+      <p class="lead" style="color: red;">Tulemus on alla 10 punkti ja seda ei saa vastu võtta, vajab täiendusi! 😢</p>
+    {% endif %}
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"><i class="fas fa-globe"></i> Töö asukoht:
+      <a href="http://dijkstra.cs.ttu.ee/~{{ loc }}/ui/t2/">http://dijkstra.cs.ttu.ee/~{{ loc }}/ui/t2/</a></li>
+    <li class="list-group-item"><i class="fas fa-people-carry"></i> Töö tehti paaris: <b>{% if uni2 %}Jah{% else %}Ei{% endif %}</b></li>
+    <li class="list-group-item"><i class="fas fa-user"></i>  {% if uni2 %}Esimese tudengi Uni-ID: <b>{{ uni1 }}</b>{% else %}Tudengi Uni-ID:
+      <b>{{ uni1 }}</b>{% endif %}</li>
+    {% if uni2 %}
+      <li class="list-group-item"><i class="fas fa-user"></i> Teise tudengi Uni-ID: <b>{{ uni2 }}</b></li>{% endif %}
+    <li class="list-group-item"><i class="fas fa-star"></i> Tulemus: <b>{{ points }}</b> punkti</li>
+  </ul>
+{% endblock %}

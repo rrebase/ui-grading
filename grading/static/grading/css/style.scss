@@ -1,0 +1,76 @@
+body {
+  background: #2C3E50; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4CA1AF, #2C3E50); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: 'Raleway', sans-serif;
+}
+
+.grading-area {
+
+  li {
+    font-size: 20px;
+  }
+
+  label {
+    color: white;
+  }
+
+  .form-control {
+    background-color: #eef3f6;
+  }
+
+  .additional-info {
+    .form-control {
+      background-color: #ace9f8;
+    }
+  }
+}
+
+/* Bootstrap Toggle v2.2.2 corrections for Bootsrtap 4*/
+.toggle-off {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.toggle.off {
+  border-color: rgba(0, 0, 0, .25);
+}
+
+.toggle-handle {
+  background-color: white;
+  //border: thin rgba(0, 0, 0, .25) solid;
+}
+
+.toggle {
+  //border: solid 1px rgb(207, 207, 207);
+}
+
+td {
+  .badge:focus {
+    outline: none;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .grading-area {
+
+    li {
+      font-size: 16px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .grading-area {
+
+    li {
+      font-size: 12px;
+    }
+
+    .btn {
+      font-size: 12px;
+    }
+
+  }
+}
